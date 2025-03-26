@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Dark background -->
+    <rect width="100" height="100" fill="#1a1e2e" />
+
+    <!-- Glowing effect -->
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+
+        <!-- Gradient for the torus -->
+        <linearGradient id="torusGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffd9b3" />
+            <stop offset="25%" stop-color="#ffb380" />
+            <stop offset="50%" stop-color="#ff9966" />
+            <stop offset="75%" stop-color="#ff8c66" />
+            <stop offset="100%" stop-color="#ff7f4d" />
+        </linearGradient>
+    </defs>
+
+    <!-- Outer glow effect -->
+    <ellipse cx="50" cy="50" rx="30" ry="30"
+        fill="none" stroke="#ff9966" stroke-width="6" opacity="0.3"
+        filter="url(#glow)" />
+
+    <!-- Main torus structure - using ellipse to create ring effect -->
+    <ellipse cx="50" cy="50" rx="30" ry="30"
+        fill="none" stroke="url(#torusGradient)" stroke-width="4"
+        filter="url(#glow)" />
+
+    <!-- Inner torus detail -->
+    <ellipse cx="50" cy="50" rx="25" ry="25"
+        fill="none" stroke="#ffb380" stroke-width="1.5" opacity="0.7"
+        filter="url(#glow)" />
+</svg>
