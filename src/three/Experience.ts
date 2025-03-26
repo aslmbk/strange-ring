@@ -19,6 +19,7 @@ export class Experience extends Engine {
 
     this.stats.activate();
     this.scene.background = new THREE.Color(this.config.clearColor);
+    this.controls.enabled = false;
 
     const geometry = new THREE.TorusGeometry(2, 0.7, 512, 1024);
     const material = new THREE.ShaderMaterial({
@@ -28,6 +29,7 @@ export class Experience extends Engine {
         uTime: new THREE.Uniform(0),
       },
       transparent: true,
+      side: THREE.DoubleSide,
     });
     const torus = new THREE.Mesh(geometry, material);
     this.scene.add(torus);
@@ -42,12 +44,13 @@ export class Experience extends Engine {
       },
       5
     );
-    this.viewport.events.on("change", () => {
-      this.effects.resize(
-        this.viewport.width,
-        this.viewport.height,
-        this.viewport.pixelRatio
-      );
+    this.viewport.events.on("change", ({ width, height, pixelRatio }) => {
+      this.effects.resize(width, height, pixelRatio);
+    });
+    this.cursor.events.on("movement", ({ x, y }) => {
+      this.view.position.x = x * 5;
+      this.view.position.y = y * 5;
+      this.view.lookAt(torus.position);
     });
   }
 }

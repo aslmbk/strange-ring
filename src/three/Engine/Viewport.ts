@@ -6,7 +6,15 @@ export class Viewport {
   public height = 0;
   public ratio = 0;
   public pixelRatio = 0;
-  public readonly events = new Events<{ trigger: "change"; args: [] }>();
+  public readonly events = new Events<{
+    trigger: "change";
+    args: {
+      width: number;
+      height: number;
+      ratio: number;
+      pixelRatio: number;
+    }[];
+  }>();
   private onResizeCb = this.onResize.bind(this);
 
   constructor(domElement: HTMLElement) {
@@ -24,6 +32,11 @@ export class Viewport {
 
   private onResize() {
     this.measure();
-    this.events.trigger("change");
+    this.events.trigger("change", {
+      width: this.width,
+      height: this.height,
+      ratio: this.ratio,
+      pixelRatio: this.pixelRatio,
+    });
   }
 }
