@@ -27,6 +27,7 @@ export class Experience extends Engine {
       uniforms: {
         uTime: new THREE.Uniform(0),
       },
+      transparent: true,
     });
     const torus = new THREE.Mesh(geometry, material);
     this.scene.add(torus);

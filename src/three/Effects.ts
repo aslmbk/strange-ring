@@ -30,8 +30,8 @@ export class Effects {
         this.renderer.domElement.width,
         this.renderer.domElement.height
       ),
-      0.6,
-      0.1,
+      0.4,
+      0.01,
       0.5
     );
     this.composer.addPass(bloomPass);
